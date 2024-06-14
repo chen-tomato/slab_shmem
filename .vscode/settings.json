@@ -1,0 +1,26 @@
+{
+    "files.associations": {
+        "ngx_slab.h": "c",
+        "stdint.h": "c",
+        "cmath": "c",
+        "types.h": "c",
+        "ngx_alloc.h": "c",
+        "stdio.h": "c",
+        "unistd.h": "c",
+        "ngx_shmtx.h": "c",
+        "fcntl.h": "c",
+        "string.h": "c",
+        "malloc.h": "c",
+        "ipc.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "utility": "c",
+        "ngx_shmem.h": "c",
+        "shm.h": "c",
+        "deque": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c"
+    }
+}
