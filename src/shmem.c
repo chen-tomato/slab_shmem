@@ -1,29 +1,29 @@
 
 
-#include "ngx_shmem.h"
+#include "../include/shmem.h"
 
 typedef __u_char u_char;
 #if (0)
 
-ngx_int_t
-ngx_shm_alloc(ngx_shm_t *shm)
+int_t
+shm_alloc(shm_t *shm)
 {
     shm->addr = (u_char *) mmap(NULL, shm->size,
                                 PROT_READ|PROT_WRITE,
                                 MAP_ANON|MAP_SHARED, -1, 0);
 
     if (shm->addr == MAP_FAILED) {
-        printf(NGX_LOG_ALERT, shm->log, ngx_errno,
+        printf(LOG_ALERT, shm->log, errno,
                       "mmap(MAP_ANON|MAP_SHARED, %luz) failed", shm->size);
-        return NGX_ERROR;
+        return ERROR;
     }
 
-    return NGX_OK;
+    return OK;
 }
 
 
 void
-ngx_shm_free(ngx_shm_t *shm)
+shm_free(shm_t *shm)
 {
     if (munmap((void *) shm->addr, shm->size) == -1) {
         printf("munmap(%p, %luz) failed", shm->addr, shm->size);
@@ -32,8 +32,8 @@ ngx_shm_free(ngx_shm_t *shm)
 
 #elif (0)
 
-ngx_int_t
-ngx_shm_alloc(ngx_shm_t *shm)
+int_t
+shm_alloc(shm_t *shm)
 {
     int  fd;
 
@@ -60,7 +60,7 @@ ngx_shm_alloc(ngx_shm_t *shm)
 
 
 void
-ngx_shm_free(ngx_shm_t *shm)
+shm_free(shm_t *shm)
 {
     if (munmap((void *) shm->addr, shm->size) == -1) {
         printf("munmap(%p, %luz) failed\n", shm->addr, shm->size);
@@ -68,8 +68,8 @@ ngx_shm_free(ngx_shm_t *shm)
 }
 
 #elif (1)
-ngx_int_t
-ngx_shm_alloc(ngx_shm_t *shm)
+int_t
+shm_alloc(shm_t *shm)
 {
     int  id;
 
@@ -97,7 +97,7 @@ ngx_shm_alloc(ngx_shm_t *shm)
 
 
 void
-ngx_shm_free(ngx_shm_t *shm)
+shm_free(shm_t *shm)
 {
     if (shmdt(shm->addr) == -1) {
         printf("shmdt(%p) failed\n", shm->addr);
